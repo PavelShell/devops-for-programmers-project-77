@@ -1,0 +1,5 @@
+collections:
+  - name: datadog.dd
+  - name: community.docker
+roles:
+  - name: geerlingguy.pip

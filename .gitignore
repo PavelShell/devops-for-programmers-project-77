@@ -1,0 +1,6 @@
+**/secrets.*
+**/*.tfstate
+**/*.tfstate.*
+**/log.txt
+**/.terraform
+**/*.backup

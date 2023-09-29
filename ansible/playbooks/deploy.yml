@@ -1,0 +1,15 @@
+- hosts: webservers
+
+  tasks:
+    - name: Create env file
+      ansible.builtin.template:
+        src: ./templates/docker_envs.env.j2
+        dest: /etc/docker.env
+
+    - name: Run Redmine in Docker container
+      community.docker.docker_container:
+        image: redmine
+        name: redmine
+        ports:
+          - "80:3000"
+        env_file: /etc/docker.env

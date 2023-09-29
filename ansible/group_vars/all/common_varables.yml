@@ -1,0 +1,10 @@
+pip_install_packages:
+  - docker
+datadog_api_key: "{{ dd_api_key }}"
+datadog_site: "datadoghq.eu"
+datadog_check:
+  http_check:
+    init_config:
+    instances:
+      - name: Redmine
+        url: "http://{{ ansible_default_ipv4.address }}:80/"
