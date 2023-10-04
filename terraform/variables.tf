@@ -10,7 +10,14 @@ variable "datadog_token" {
   sensitive = true
 }
 
-variable "golang_server_name" {
-  type = string
-  default	= "trinity7"
+variable "cloudns_auth_id" {
+  description = "ClouDNS platform authentication ID"
+  type        = string
+  sensitive = true
+}
+
+variable "cloudns_password" {
+  description = "ClouDNS platform API password"
+  type        = string
+  sensitive = true
 }

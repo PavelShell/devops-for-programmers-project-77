@@ -53,4 +53,14 @@ resource "digitalocean_loadbalancer" "load_balancer" {
 
   droplet_ids = [digitalocean_droplet.app_node_1.id, digitalocean_droplet.app_node_2.id]
 }
- 
+
+resource "digitalocean_domain" "sagser" {
+  name = "dnstest.sagser.cloudns.ph"
+}
+
+resource "digitalocean_record" "www" {
+  domain = digitalocean_domain.sagser.id
+  type   = "A"
+  name   = "@"
+  value  = digitalocean_loadbalancer.load_balancer.ip
+}
