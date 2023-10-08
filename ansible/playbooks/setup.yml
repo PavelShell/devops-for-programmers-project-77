@@ -1,5 +1,12 @@
 - hosts: webservers
 
   roles:
-    - geerlingguy.pip
     - datadog.dd.agent
+  vars:
+    datadog_checks:
+      tcp_check:
+        init_config:
+        instances:
+          - name: Healthcheck
+            host: "{{ ansible_host }}"
+            port: 80

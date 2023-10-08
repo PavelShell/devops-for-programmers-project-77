@@ -64,3 +64,34 @@ resource "digitalocean_record" "www" {
   name   = "@"
   value  = digitalocean_loadbalancer.load_balancer.ip
 }
+
+resource "datadog_monitor_json" "monitor_json" {
+  monitor = <<-EOF
+{
+	"name": "КАРАУЛ, ПРОД УПАЛ!!",
+	"type": "service check",
+	"query": "\"tcp.can_connect\".over(\"instance:healthcheck\").by(\"*\").last(2).count_by_status()",
+	"message": "КАРАУЛ, ПРОД УПАЛ!!",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": 1,
+			"warning": 1,
+			"ok": 1
+		},
+		"notify_audit": false,
+		"notify_no_data": true,
+		"no_data_timeframe": 2,
+		"renotify_interval": 0,
+		"timeout_h": 0,
+		"include_tags": false,
+		"new_host_delay": 300,
+		"silenced": {}
+	},
+	"priority": null,
+	"restricted_roles": null
+}
+EOF
+
+	depends_on = [digitalocean_loadbalancer.load_balancer]
+}

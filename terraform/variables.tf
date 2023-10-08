@@ -10,14 +10,8 @@ variable "datadog_token" {
   sensitive = true
 }
 
-variable "cloudns_auth_id" {
-  description = "ClouDNS platform authentication ID"
-  type        = string
-  sensitive = true
-}
-
-variable "cloudns_password" {
-  description = "ClouDNS platform API password"
+variable "datadog_app_token" {
+  description = "Datadog app token"
   type        = string
   sensitive = true
 }

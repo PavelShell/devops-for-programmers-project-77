@@ -2,12 +2,12 @@ terraform {
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
-      version = "~> 2.0"
+      version = "~> 2.30"
     }
 
-    cloudns = {
-    	source = "SharkyRawr/cloudns"
-      version = "~> 0.0.7"
+    datadog = {
+    	source = "DataDog/datadog"
+      version = "~> 3.30"
     }
   }
 }
@@ -16,8 +16,8 @@ provider "digitalocean" {
   token = var.do_token
 }
 
-provider "cloudns" {
-	auth_id = var.cloudns_auth_id
-
-	password = var.cloudns_password  
+provider "datadog" {
+	api_key = var.datadog_token
+	app_key = var.datadog_app_token
+	api_url = "https://api.datadoghq.eu/"
 }
