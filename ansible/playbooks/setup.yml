@@ -10,3 +10,15 @@
           - name: Healthcheck
             host: "{{ ansible_host }}"
             port: 80
+
+  tasks:
+    - name: Install cron scheduler
+      ansible.builtin.apt:
+        name: cron
+        update_cache: yes
+    - name: Setup cron job for availability check
+      ansible.builtin.cron:
+        name: "Availablity check"
+        minute: "30"
+        job: "curl -fsS -m 10 --retry 5 -o /dev/null {{ availability_check_url }}"
+        
