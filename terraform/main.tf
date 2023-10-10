@@ -33,16 +33,25 @@ resource "digitalocean_droplet" "app_node_2" {
 	ssh_keys = [data.digitalocean_ssh_key.default.fingerprint]
 }
 
+resource "digitalocean_certificate" "cert" {
+  name              = "my-certificate"
+  type              = "custom"
+  private_key       = file("certs/private.key")
+  leaf_certificate  = file("certs/certificate.crt")
+}
+
 resource "digitalocean_loadbalancer" "load_balancer" {
   name   = "loadbalancer"
   region = "fra1"
 
   forwarding_rule {
-    entry_port     = 80
-    entry_protocol = "http"
+    entry_port     = 443
+    entry_protocol = "https"
 
     target_port     = 80
     target_protocol = "http"
+
+    certificate_name = digitalocean_certificate.cert.name
   }
 
   healthcheck {

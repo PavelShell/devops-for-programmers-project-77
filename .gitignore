@@ -6,3 +6,4 @@
 **/*.backup
 **/*.lock.hcl
 terraform/keys
+terraform/certs
