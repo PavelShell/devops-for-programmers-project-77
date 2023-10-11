@@ -16,28 +16,28 @@ data "local_file" "private_key" {
 }
 
 resource "digitalocean_droplet" "app_node_1" {
-  name   = "node-1"
-  size   = "s-1vcpu-1gb"
-  image  = "docker-20-04"
-  region = "fra1"
+  name       = "node-1"
+  size       = "s-1vcpu-1gb"
+  image      = "docker-20-04"
+  region     = "fra1"
   depends_on = [digitalocean_database_cluster.postgres]
-	ssh_keys = [data.digitalocean_ssh_key.default.fingerprint]
+  ssh_keys   = [data.digitalocean_ssh_key.default.fingerprint]
 }
 
 resource "digitalocean_droplet" "app_node_2" {
-  name   = "node-2"
-  size   = "s-1vcpu-1gb"
-  image  = "docker-20-04"
-  region = "fra1"
+  name       = "node-2"
+  size       = "s-1vcpu-1gb"
+  image      = "docker-20-04"
+  region     = "fra1"
   depends_on = [digitalocean_database_cluster.postgres]
-	ssh_keys = [data.digitalocean_ssh_key.default.fingerprint]
+  ssh_keys   = [data.digitalocean_ssh_key.default.fingerprint]
 }
 
 resource "digitalocean_certificate" "cert" {
-  name              = "my-certificate"
-  type              = "custom"
-  private_key       = file("certs/private.key")
-  leaf_certificate  = file("certs/certificate.crt")
+  name             = "my-certificate"
+  type             = "custom"
+  private_key      = file("certs/private.key")
+  leaf_certificate = file("certs/certificate.crt")
 }
 
 resource "digitalocean_loadbalancer" "load_balancer" {
@@ -102,5 +102,5 @@ resource "datadog_monitor_json" "monitor_json" {
 }
 EOF
 
-	depends_on = [digitalocean_loadbalancer.load_balancer]
+  depends_on = [digitalocean_loadbalancer.load_balancer]
 }

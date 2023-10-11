@@ -21,4 +21,3 @@
         name: "Availablity check"
         minute: "30"
         job: "curl -fsS -m 10 --retry 5 -o /dev/null {{ availability_check_url }}"
-        
