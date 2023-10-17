@@ -7,3 +7,4 @@
 **/*.lock.hcl
 terraform/keys
 terraform/certs
+ansible/host_vars/*/ansible_vars.yml
